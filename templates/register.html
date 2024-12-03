@@ -1,24 +1,46 @@
-{% extends "heading.html" %} {% block content %}
-<div class="container" style="text-align: center">
-  <h1 class="my-2">Register Page</h1>
-  {% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-  {% for category, message in messages %}
-  <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-    {{message}}
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+{% extends "heading.html" %} 
+{% block content %}
+<div class="container" style="max-width: 500px; margin: auto; padding-top: 50px;">
+  <div class="card">
+    <div class="card-body">
+      <h1 class="card-title text-center my-2">Register</h1>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+      {% for category, message in messages %}
+      <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+      <form method="POST" action="">
+        <div class="form-group my-2">{{ form.hidden_tag() }}</div>
+        <div class="form-group my-2">
+          {{ form.username.label(class="form-label") }}
+          {{ form.username(class="form-control") }}
+        </div>
+        <div class="form-group my-2">
+          {{ form.email.label(class="form-label") }}
+          {{ form.email(class="form-control") }}
+        </div>
+        <div class="form-group my-2">
+          {{ form.mobile.label(class="form-label") }}
+          {{ form.mobile(class="form-control") }}
+        </div>
+        <div class="form-group my-2">
+          {{ form.password.label(class="form-label") }}
+          {{ form.password(class="form-control") }}
+        </div>
+        <div class="form-group my-2">
+          {{ form.password2.label(class="form-label") }}
+          {{ form.password2(class="form-control") }}
+        </div>
+        <div class="form-group my-2">
+          {{ form.submit(class="btn btn-primary w-100") }}
+        </div>
+      </form>
+    </div>
   </div>
-  {% endfor %}
-  {% endif %}
-  {% endwith %}
-  <form method="POST" action="">
-    <div class="form-group my-2">{{ form.hidden_tag() }}</div>
-    <div class="form-group my-2">{{ form.username }}</div>
-    <div class="form-group my-2">{{ form.email }}</div>
-    <div class="form-group my-2">{{ form.mobile }}</div>
-    <div class="form-group my-2">{{ form.password }}</div>
-    <div class="form-group my-2">{{ form.password2 }}</div>
-    <div class="form-group my-2">{{ form.submit }}</div>
-  </form>
 </div>
 {% endblock %}

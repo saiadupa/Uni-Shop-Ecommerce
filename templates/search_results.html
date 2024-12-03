@@ -1,0 +1,30 @@
+{% extends "heading.html" %}
+{% block content %}
+<link rel="icon" property="icon" href="https://cdn-icons-png.flaticon.com/512/282/282100.png" type="image/x-icon" />
+<link rel="stylesheet" property="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+
+<div class="container mt-4">
+    <h2 style="text-align:center;" class="my-4">Search Results for "{{ query }}"</h2>
+    
+    {% if results %}
+        <div class="row">
+            {% for product in results %}
+                <div class="col-lg-4 mb-4">
+                    <div class="card h-100">
+                        <img src="{{ url_for('static', filename='images/' ~ product.imageName) }}" class="card-img-top img-fluid" alt="{{ product.name }}" style="height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <h4 class="card-title">{{ product.name }}</h4>
+                            <p class="card-text">{{ product.description }}</p>
+                            <form action="{{ url_for('order', productid=product.id) }}" method="get">
+                                <button type="submit" class="btn btn-primary">Order</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p style="text-align:center;">No products found.</p>
+    {% endif %}
+</div>
+{% endblock %}
